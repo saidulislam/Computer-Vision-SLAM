@@ -6,7 +6,7 @@ Below is an example of a 2D robot world with landmarks (purple x's) and the robo
 
 <img src="images/robot_world.png" align="top-left" alt="" title="Plot" width="60%" height="60%"/>
 
-### Project Instructions
+
 The project is broken up into three Jupyter notebooks:
 
 Notebook 1 : Robot Moving and Sensing
