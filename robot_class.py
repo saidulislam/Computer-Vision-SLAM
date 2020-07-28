@@ -77,7 +77,7 @@ class robot:
             One item in the returned list should be in the form: [landmark_index, dx, dy].
             '''
            
-        measurements = None
+        measurements = []
         
         ## TODO: iterate through all of the landmarks in a world
         
@@ -91,6 +91,22 @@ class robot:
         ##    as list.append([index, dx, dy]), this format is important for data creation done later
         
         ## TODO: return the final, complete list of measurements
+        
+
+        for index, each_landmark in enumerate(self.landmarks):
+            dx = each_landmark[0] - self.x
+            dy = each_landmark[1] - self.y
+            #print(f"(dx, dy) = ({dx}, {dy})")
+            noise = (2.0 * np.random.random(1) - 1.0) * self.measurement_noise
+            #print(f'noise = {noise}')
+
+            dx += noise if dx < self.measurement_range else 0
+            dy += noise if dy < self.measurement_range else 0
+            if dx and dy:
+                measurements.append([index, dx, dy])
+                #print(f"(dx, dy) = ({dx}, {dy})")
+                  
+
         return measurements
 
 
