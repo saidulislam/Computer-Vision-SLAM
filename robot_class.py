@@ -93,9 +93,9 @@ class robot:
         ## TODO: return the final, complete list of measurements
         
 
-        for index, each_landmark in enumerate(self.landmarks):
-            dx = each_landmark[0] - self.x
-            dy = each_landmark[1] - self.y
+        for index, s_landmark in enumerate(self.landmarks):
+            dx = s_landmark[0] - self.x
+            dy = s_landmark[1] - self.y
             #print(f"(dx, dy) = ({dx}, {dy})")
             noise = (2.0 * np.random.random(1) - 1.0) * self.measurement_noise
             #print(f'noise = {noise}')
