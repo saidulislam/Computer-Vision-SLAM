@@ -1,4 +1,5 @@
 from math import *
+import numpy as np
 import random
 
 
@@ -46,10 +47,10 @@ class robot:
     #       boundary, then the move does nothing and instead returns failure
     #
     def move(self, dx, dy):
-        
+
         x = self.x + dx + self.rand() * self.motion_noise
         y = self.y + dy + self.rand() * self.motion_noise
-        
+
         if x < 0.0 or x > self.world_size or y < 0.0 or y > self.world_size:
             return False
         else:
@@ -93,15 +94,16 @@ class robot:
         ## TODO: return the final, complete list of measurements
         
 
-        for index, s_landmark in enumerate(self.landmarks):
-            dx = s_landmark[0] - self.x
-            dy = s_landmark[1] - self.y
-            #print(f"(dx, dy) = ({dx}, {dy})")
-            noise = (2.0 * np.random.random(1) - 1.0) * self.measurement_noise
-            #print(f'noise = {noise}')
+        for index, each_landmark in enumerate(self.landmarks):
+            dx = each_landmark[0] - self.x
+            dy = each_landmark[1] - self.y
+            
+            random_noise = (2.0 * np.random.random(1) - 1.0) * self.measurement_noise
+            
 
-            dx += noise if dx < self.measurement_range else 0
-            dy += noise if dy < self.measurement_range else 0
+            dx += random_noise if dx < self.measurement_range else 0
+            dy += random_noise if dy < self.measurement_range else 0
+            
             if dx and dy:
                 measurements.append([index, dx, dy])
                 #print(f"(dx, dy) = ({dx}, {dy})")
@@ -117,8 +119,8 @@ class robot:
     def make_landmarks(self, num_landmarks):
         self.landmarks = []
         for i in range(num_landmarks):
-            self.landmarks.append([round(random.random() * self.world_size),
-                                   round(random.random() * self.world_size)])
+            self.landmarks.append([round(np.random.random() * self.world_size),
+                                   round(np.random.random() * self.world_size)])
         self.num_landmarks = num_landmarks
 
 
